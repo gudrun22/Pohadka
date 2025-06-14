@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tajemství zapomenuté laboratoře</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Úvodní obrazovka -->
+        <div id="intro-screen" class="screen active">
+            <div class="story-container">
+                <h1 class="game-title">Tajemství zapomenuté laboratoře</h1>
+                <div class="story-image">
+                    <img src="https://pplx-res.cloudinary.com/image/upload/v1749533696/gpt4o_images/et8syzlsjcctjlhumqzi.png" alt="Opuštěná laboratoř Dr. Nováka">
+                </div>
+                <div class="story-text">
+                    <p><strong>Rok 1987:</strong> Dr. Martin Novák, uznávaný chemik, zmizel za záhadných okolností ze své laboratoře krátce před dokončením revolučního protiléku proti neznámé nemoci. Jeho laboratoř byla uzavřena a oficiálně prohlášena za nebezpečnou.</p>
+                    
+                    <p><strong>Současnost:</strong> Vaše skupina archeologických badatelů objevila vchod do zapečetěné laboratoře. Podle nálezů se zdá, že Dr. Novák ukryl svůj protilék někde v laboratoři před svým zmizením.</p>
+                    
+                    <p><strong>Vaším úkolem</strong> je najít protilék, odhalit pravdu o zmizení Dr. Nováka a uniknout z laboratoře dříve, než vás objeví bezpečnostní služba.</p>
+                </div>
+                <div class="instructions">
+                    <h3>Instrukce:</h3>
+                    <ul>
+                        <li>Máte 60 minut na dokončení všech úkolů</li>
+                        <li>Každý úkol má maximálně 3 nápovědy</li>
+                        <li>Úkoly se odemykají postupně</li>
+                        <li>Zadávejte odpovědi přesně podle pokynů</li>
+                    </ul>
+                </div>
+                <button class="btn btn--primary btn--lg" id="start-game">Začít hru</button>
+            </div>
+        </div>
+
+        <!-- Herní obrazovka -->
+        <div id="game-screen" class="screen">
+            <div class="game-header">
+                <div class="timer-container">
+                    <span class="timer-label">Zbývající čas:</span>
+                    <span id="timer" class="timer">60:00</span>
+                </div>
+                <div class="progress-container">
+                    <div class="progress-bar">
+                        <div id="progress" class="progress-fill"></div>
+                    </div>
+                    <span class="progress-text">Úkol <span id="current-task">1</span> z 5</span>
+                </div>
+            </div>
+
+            <div class="game-content">
+                <!-- Úkol 1: Číselný kód -->
+                <div id="task-1" class="task active">
+                    <h2>Zabezpečený vchod</h2>
+                    <p class="task-description">Dveře laboratoře jsou uzamčené 4místným číselným kódem.</p>
+                    <div class="keypad">
+                        <div class="question">Zadejte 4místný číselný kód:</div>
+                        <input type="text" id="code-input" class="form-control code-input" maxlength="4" placeholder="____">
+                        <button class="btn btn--primary" id="submit-code">Potvrdit</button>
+                    </div>
+                </div>
+
+                <!-- Úkol 2: Chemická formule -->
+                <div id="task-2" class="task">
+                    <h2>Chemická formule</h2>
+                    <p class="task-description">Najděte správné složení protiléku z chemických vzorců na tabuli.</p>
+                    <div class="chemistry-board">
+                        <div class="question">Vyberte správné složení protiléku:</div>
+                        <div class="options">
+                            <button class="option-btn" data-value="H2SO4 + KOH + CH4">H₂SO₄ + KOH + CH₄</button>
+                            <button class="option-btn" data-value="H2O + NaCl + C6H12O6">H₂O + NaCl + C₆H₁₂O₆</button>
+                            <button class="option-btn" data-value="HCl + NaOH + C2H5OH">HCl + NaOH + C₂H₅OH</button>
+                            <button class="option-btn" data-value="NH3 + CO2 + H2O2">NH₃ + CO₂ + H₂O₂</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Úkol 3: Šifrovaný deník -->
+                <div id="task-3" class="task">
+                    <h2>Šifrovaný deník</h2>
+                    <p class="task-description">Dekódujte Caesarovu šifru v Dr. Novákově deníku.</p>
+                    <div class="cipher-container">
+                        <div class="encrypted-message">"ODERUDQŘ MH QHEHCSHOQC"</div>
+                        <div class="question">Dekódujte zprávu:</div>
+                        <input type="text" id="cipher-input" class="form-control" placeholder="Zadejte dekódovanou zprávu">
+                        <button class="btn btn--primary" id="submit-cipher">Potvrdit</button>
+                    </div>
+                </div>
+
+                <!-- Úkol 4: Sekvence světel -->
+                <div id="task-4" class="task">
+                    <h2>Sekvence světel</h2>
+                    <p class="task-description">Aktivujte přístroje ve správné sekvenci podle barevného kódu.</p>
+                    <div class="color-sequence">
+                        <div class="question">Klikněte na barvy ve správném pořadí:</div>
+                        <div class="color-buttons">
+                            <button class="color-btn green" data-color="Zelená">Zelená</button>
+                            <button class="color-btn blue" data-color="Modrá">Modrá</button>
+                            <button class="color-btn red" data-color="Červená">Červená</button>
+                            <button class="color-btn yellow" data-color="Žlutá">Žlutá</button>
+                        </div>
+                        <div class="sequence-display">
+                            <div class="sequence-label">Vaše sekvence:</div>
+                            <div id="selected-sequence" class="selected-colors"></div>
+                        </div>
+                        <div class="sequence-controls">
+                            <button class="btn btn--secondary" id="reset-sequence">Resetovat</button>
+                            <button class="btn btn--primary" id="submit-sequence">Potvrdit</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Úkol 5: Finální únik -->
+                <div id="task-5" class="task">
+                    <h2>Finální únik</h2>
+                    <p class="task-description">Najděte tajný východ pomocí knihovny a posledního vodítka.</p>
+                    <div class="library-container">
+                        <div class="question">Kterou knihu vytáhnete z knihovny?</div>
+                        <div class="books">
+                            <button class="book-btn" data-value="Pokročilá organická chemie">
+                                <div class="book-spine">Pokročilá organická chemie</div>
+                            </button>
+                            <button class="book-btn" data-value="Chemie pro začátečníky">
+                                <div class="book-spine">Chemie pro začátečníky</div>
+                            </button>
+                            <button class="book-btn" data-value="Kvantová mechanika">
+                                <div class="book-spine">Kvantová mechanika</div>
+                            </button>
+                            <button class="book-btn" data-value="Dějiny vědy">
+                                <div class="book-spine">Dějiny vědy</div>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Nápovědy -->
+                <div class="hints-container">
+                    <button class="btn btn--outline" id="hint-btn">
+                        Nápověda (<span id="hints-left">3</span> zbývá)
+                    </button>
+                    <div id="hint-display" class="hint-display"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Výsledková obrazovka -->
+        <div id="result-screen" class="screen">
+            <div class="result-container">
+                <div id="success-result" class="result-content">
+                    <h1>Gratulace!</h1>
+                    <div class="scientist-image">
+                        <img src="https://pplx-res.cloudinary.com/image/upload/v1749533776/gpt4o_images/xxp0vlpkkylv8crweu9q.png" alt="Dr. Martin Novák">
+                    </div>
+                    <p>Úspěšně jste vyřešili všechny úkoly a odhalili tajemství Dr. Nováka!</p>
+                    <p>Protilék byl nalezen a laboratoř je nyní v bezpečí.</p>
+                    <div class="final-stats">
+                        <div class="stat">
+                            <span class="stat-label">Dokončeno za:</span>
+                            <span id="completion-time" class="stat-value"></span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-label">Použité nápovědy:</span>
+                            <span id="hints-used" class="stat-value"></span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="failure-result" class="result-content">
+                    <h1>Čas vypršel!</h1>
+                    <p>Bohužel se vám nepodařilo vyřešit všechny úkoly včas.</p>
+                    <p>Bezpečnostní služba vás objevila a laboratoř zůstává uzavřena...</p>
+                </div>
+                
+                <button class="btn btn--primary btn--lg" id="play-again">Hrát znovu</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
